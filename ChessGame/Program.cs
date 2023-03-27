@@ -1,4 +1,4 @@
 ﻿using ChessGame.Tabuleiro;
 
-Posicao posicao = new Posicao(3, 4);
-Console.WriteLine($"Posição: {posicao}");
+Tabuleiro tabuleiro = new Tabuleiro(8, 8);
+Console.WriteLine($"Posição: {tabuleiro}");
