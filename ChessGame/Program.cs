@@ -1,4 +1,5 @@
-﻿using ChessGame.Tabuleiro;
+﻿using ChessGame;
+using ChessGame.tabuleiro;
 
 Tabuleiro tabuleiro = new Tabuleiro(8, 8);
-Console.WriteLine($"Posição: {tabuleiro}");
+Tela.ImprimirTabuleiro(tabuleiro);

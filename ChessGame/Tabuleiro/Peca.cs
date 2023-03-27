@@ -1,4 +1,4 @@
-﻿namespace ChessGame.Tabuleiro
+﻿namespace ChessGame.tabuleiro
 {
     internal class Peca
     {

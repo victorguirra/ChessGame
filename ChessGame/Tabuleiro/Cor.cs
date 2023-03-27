@@ -1,4 +1,4 @@
-﻿namespace ChessGame.Tabuleiro
+﻿namespace ChessGame.tabuleiro
 {
     enum Cor
     {
