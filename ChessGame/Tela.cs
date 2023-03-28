@@ -8,19 +8,33 @@ namespace ChessGame
         {
             for (int i = 0; i < tabuleiro.Linhas; i++)
             {
+                Console.Write($"{8 - i} ");
+
                 for (int j = 0; j < tabuleiro.Colunas; j++)
                 {
                     Peca peca = tabuleiro.Peca(i, j);
                     string mensagem = string.Empty;
 
                     if (peca == null)
-                        mensagem = "- ";
+                        Console.Write("- ");
                     else
-                        mensagem = $"{peca} ";
-                    
-                    Console.Write(mensagem);
+                        ImprimirPeca(peca);
                 }
                 Console.WriteLine(string.Empty);
+            }
+            Console.WriteLine(" a b c d e f g h");
+        }
+
+        public static void ImprimirPeca(Peca peca)
+        {
+            if (peca.Cor == Cor.Branca)
+                Console.Write(peca);
+            else
+            {
+                ConsoleColor aux = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(peca);
+                Console.ForegroundColor = aux;
             }
         }
     }
