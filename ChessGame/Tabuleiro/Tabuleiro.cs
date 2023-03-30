@@ -58,7 +58,7 @@
         {
             bool posicaoValida =
                 posicao.Linha < 0 || posicao.Linha >= Linhas ||
-                posicao.Coluna < 0 || posicao.Linha >= Colunas;
+                posicao.Coluna < 0 || posicao.Coluna >= Colunas;
 
             return !posicaoValida;
         }
