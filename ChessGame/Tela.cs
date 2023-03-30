@@ -15,6 +15,9 @@ namespace ChessGame
 
             Console.WriteLine($"Turno: {partidaXadrez.Turno}");
             Console.WriteLine($"Aguardando jogada: {partidaXadrez.JogadorAtual}");
+
+            if(partidaXadrez.Xeque)
+                Console.WriteLine("XEQUE");
         }
         
         public static void ImprimirPecasCapturadas(PartidaXadrez partida)
