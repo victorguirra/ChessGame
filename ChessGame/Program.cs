@@ -4,17 +4,22 @@ using ChessGame.xadrez;
 
 try
 {
-    Tabuleiro tabuleiro = new Tabuleiro(8, 8);
+    PartidaXadrez partidaXadrez = new PartidaXadrez();
 
-    tabuleiro.ColocarPeca(new Torre(tabuleiro, Cor.Preta), new Posicao(0, 0));
-    tabuleiro.ColocarPeca(new Torre(tabuleiro, Cor.Preta), new Posicao(1, 3));
-    tabuleiro.ColocarPeca(new Rei(tabuleiro, Cor.Preta), new Posicao(2, 4));
-    tabuleiro.ColocarPeca(new Rei(tabuleiro, Cor.Preta), new Posicao(0, 2));
+    while (!partidaXadrez.Terminada)
+    {
+        Console.Clear();
+        Tela.ImprimirTabuleiro(partidaXadrez.Tabuleiro);
 
-    tabuleiro.ColocarPeca(new Torre(tabuleiro, Cor.Branca), new Posicao(3, 5));
-    tabuleiro.ColocarPeca(new Torre(tabuleiro, Cor.Branca), new Posicao(4, 7));
+        Console.WriteLine(string.Empty);
+        Console.Write("Origem: ");
+        Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
 
-    Tela.ImprimirTabuleiro(tabuleiro);
+        Console.Write("Destino: ");
+        Posicao destino = Tela.LerPosicaoXadrez().ToPosicao();
+
+        partidaXadrez.ExecutaMovimento(origem, destino);
+    }
 }
 catch(TabuleiroException ex)
 {

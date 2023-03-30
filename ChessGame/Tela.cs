@@ -1,4 +1,5 @@
 ﻿using ChessGame.tabuleiro;
+using ChessGame.xadrez;
 
 namespace ChessGame
 {
@@ -28,14 +29,23 @@ namespace ChessGame
         public static void ImprimirPeca(Peca peca)
         {
             if (peca.Cor == Cor.Branca)
-                Console.Write(peca);
+                Console.Write($"{peca} ");
             else
             {
                 ConsoleColor aux = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write(peca);
+                Console.Write($"{peca} ");
                 Console.ForegroundColor = aux;
             }
+        }
+
+        public static PosicaoXadrez LerPosicaoXadrez()
+        {
+            string entrada = Console.ReadLine();
+            char coluna = entrada[0];
+            int linha = int.Parse(entrada[1].ToString());
+
+            return new PosicaoXadrez(coluna, linha);
         }
     }
 }
