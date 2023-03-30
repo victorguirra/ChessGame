@@ -11,10 +11,7 @@ try
         try
         {
             Console.Clear();
-            Tela.ImprimirTabuleiro(partidaXadrez.Tabuleiro);
-            Console.WriteLine(string.Empty);
-            Console.WriteLine($"Turno: {partidaXadrez.Turno}");
-            Console.WriteLine($"Aguardando jogada: {partidaXadrez.JogadorAtual}");
+            Tela.ImprimirPartida(partidaXadrez);
 
             Console.WriteLine(string.Empty);
             Console.Write("Origem: ");
