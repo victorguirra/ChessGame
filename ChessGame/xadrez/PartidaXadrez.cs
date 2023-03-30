@@ -56,10 +56,15 @@ namespace ChessGame.xadrez
                 Xeque = true;
             else
                 Xeque = false;
-            
 
-            Turno++;
-            MudaJogador();
+            bool xequeMate = XequeMate(adversario);
+            if (xequeMate)
+                Terminada = true;
+            else
+            {
+                Turno++;
+                MudaJogador();
+            }
         }
 
         public void DesfazMovimento(Posicao origem, Posicao destino, Peca pecaCapturada)
@@ -161,6 +166,39 @@ namespace ChessGame.xadrez
             return false;
         }
         
+        public bool XequeMate(Cor cor)
+        {
+            bool xeque = EstaEmXeque(cor);
+            if (!xeque)
+                return false;
+
+            HashSet<Peca> pecasEmJogo = ObterPecas(cor);
+            foreach(Peca peca in pecasEmJogo)
+            {
+                bool[,] movimentosPossiveis = peca.MovimentosPossiveis();
+                for(int i = 0; i < Tabuleiro.Linhas; i++)
+                {
+                    for(int j = 0; j < Tabuleiro.Colunas; j++)
+                    {
+                        bool posicaoPossivel = movimentosPossiveis[i, j];
+                        if (posicaoPossivel)
+                        {
+                            Posicao origem = peca.Posicao;
+                            Posicao destino = new Posicao(i, j);
+                            Peca pecaCapturada = ExecutaMovimento(origem, destino);
+                            bool testeXeque = EstaEmXeque(cor);
+                            DesfazMovimento(origem, destino, pecaCapturada);
+
+                            if (!testeXeque)
+                                return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+
         public void ColocarNovaPeca(char coluna, int linha, Peca peca)
         {
             Tabuleiro.ColocarPeca(peca, new PosicaoXadrez(coluna, linha).ToPosicao());

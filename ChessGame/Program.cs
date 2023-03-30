@@ -37,7 +37,9 @@ try
             Console.ReadLine();
         }
     }
-        
+
+    Console.Clear();
+    Tela.ImprimirPartida(partidaXadrez);
 }
 catch(TabuleiroException ex)
 {

@@ -14,10 +14,19 @@ namespace ChessGame
             Console.WriteLine(string.Empty);
 
             Console.WriteLine($"Turno: {partidaXadrez.Turno}");
-            Console.WriteLine($"Aguardando jogada: {partidaXadrez.JogadorAtual}");
 
-            if(partidaXadrez.Xeque)
-                Console.WriteLine("XEQUE");
+            if (!partidaXadrez.Terminada)
+            {
+                Console.WriteLine($"Aguardando jogada: {partidaXadrez.JogadorAtual}");
+
+                if (partidaXadrez.Xeque)
+                    Console.WriteLine("XEQUE");
+            }
+            else
+            {
+                Console.WriteLine("XEQUEMATE!");
+                Console.WriteLine($"Vencedor: {partidaXadrez.JogadorAtual}");
+            }
         }
         
         public static void ImprimirPecasCapturadas(PartidaXadrez partida)
