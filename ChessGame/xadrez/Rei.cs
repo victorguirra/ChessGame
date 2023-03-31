@@ -4,8 +4,13 @@ namespace ChessGame.xadrez
 {
     internal class Rei : Peca
     {
-        public Rei(Tabuleiro tabuleiro, Cor cor)
-            : base(tabuleiro, cor) { }
+        private PartidaXadrez Partida;
+        
+        public Rei(Tabuleiro tabuleiro, Cor cor, PartidaXadrez partida)
+            : base(tabuleiro, cor)
+        {
+            this.Partida = partida;
+        }
 
         public override string ToString()
         {
@@ -16,6 +21,12 @@ namespace ChessGame.xadrez
         {
             Peca peca = Tabuleiro.Peca(posicao);
             return peca == null || peca.Cor != Cor;
+        }
+
+        private bool TesteTorreParaRoque(Posicao pos)
+        {
+            Peca peca = Tabuleiro.Peca(pos);
+            return peca != null && peca is Torre && peca.Cor == Cor && peca.QtdMovimentos == 0;
         }
 
         public override bool[,] MovimentosPossiveis()
@@ -71,6 +82,40 @@ namespace ChessGame.xadrez
 
             if (Tabuleiro.PosicaoValida(pos) && PermiteMover(pos))
                 mat[pos.Linha, pos.Coluna] = true;
+
+            // #JOGADAESPECIAL | ROQUE
+            if(QtdMovimentos == 0 && !Partida.Xeque)
+            {
+                // #JOGADAESPECIAL ROQUE PEQUENO;
+                Posicao posicaoTorre1 = new Posicao(Posicao.Linha, Posicao.Coluna + 3);
+                bool torreRoquePequeno = TesteTorreParaRoque(posicaoTorre1);
+                if (torreRoquePequeno)
+                {
+                    Posicao p1 = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
+                    Posicao p2 = new Posicao(Posicao.Linha, Posicao.Coluna + 2);
+
+                    if(Tabuleiro.Peca(p1) == null && Tabuleiro.Peca(p2) == null)
+                    {
+                        mat[Posicao.Linha, Posicao.Coluna + 2] = true;
+                    }
+                }
+
+                // #JOGADAESPECIAL ROQUE GRANDE;
+                Posicao posicaoTorre2 = new Posicao(Posicao.Linha, Posicao.Coluna - 4);
+                bool torreRoqueGrande = TesteTorreParaRoque(posicaoTorre2);
+                if (torreRoqueGrande)
+                {
+                    Posicao p1 = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
+                    Posicao p2 = new Posicao(Posicao.Linha, Posicao.Coluna - 2);
+                    Posicao p3 = new Posicao(Posicao.Linha, Posicao.Coluna - 3);
+
+                    if (Tabuleiro.Peca(p1) == null && Tabuleiro.Peca(p2) == null && Tabuleiro.Peca(p3) == null)
+                    {
+                        mat[Posicao.Linha, Posicao.Coluna - 2] = true;
+                    }
+                }
+            }
+
 
             return mat;
         }
