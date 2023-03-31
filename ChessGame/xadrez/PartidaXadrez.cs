@@ -99,7 +99,7 @@ namespace ChessGame.xadrez
         {
             Peca pecaOrigem = Tabuleiro.Peca(origem);
 
-            if (!pecaOrigem.PodeMoverPara(destino))
+            if (!pecaOrigem.MovimentoPossivel(destino))
                 throw new TabuleiroException("Posição de destino inválida!");
         }
 
